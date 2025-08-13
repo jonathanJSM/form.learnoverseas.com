@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Workshop Registration - Learn Overseas</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #eeeff3 0%, #f1f5eb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,.1);
+            overflow: hidden;
+            animation: slideUp .6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #00104B 0%, #1a237e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 30px 30px 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before{
+            content:'';
+            position:absolute; inset:-50%;
+            background: radial-gradient(circle, rgba(252,226,5,.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(180deg)} }
+
+        /* Logo Styling */
+        .logo {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin-bottom:14px;
+            position:relative;
+            z-index:1;
+        }
+        .logo-img {
+            width:160px;
+            max-width:80%;
+            height:auto;
+            object-fit:contain;
+            display:block;
+            filter: drop-shadow(0 6px 16px rgba(0,16,75,.25));
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: .9;
+            position:relative;
+            z-index:1;
+        }
+
+        .form-container { padding: 40px 30px; }
+
+        .form-group {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp .6s ease-out forwards;
+        }
+        .form-group:nth-child(1){animation-delay:.1s}
+        .form-group:nth-child(2){animation-delay:.2s}
+        .form-group:nth-child(3){animation-delay:.3s}
+        .form-group:nth-child(4){animation-delay:.4s}
+        .form-group:nth-child(5){animation-delay:.5s}
+        .form-group:nth-child(6){animation-delay:.6s}
+        .form-group:nth-child(7){animation-delay:.7s}
+        .form-group:nth-child(8){animation-delay:.8s}
+
+        @keyframes fadeInUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+
+        label { display:block; margin-bottom:8px; font-weight:600; color:#00104B; font-size:.95rem; }
+        .required { color:#d32f2f; }
+
+        input, select {
+            width:100%;
+            padding:15px 20px;
+            border:2px solid #e9ecef;
+            border-radius:12px;
+            font-size:1rem;
+            transition: all .3s ease;
+            background:#f8f9fa;
+        }
+        input:focus, select:focus{
+            outline:none; border-color:#00104B; background:#fff;
+            box-shadow:0 0 0 3px rgba(0,16,75,.1);
+            transform: translateY(-2px);
+        }
+        input:valid { border-color:#FCE205; }
+
+        .phone-group, .location-group {
+            display:grid; grid-template-columns:1fr 1fr; gap:20px;
+        }
+
+        .submit-btn{
+            width:100%; padding:18px;
+            background: linear-gradient(135deg, #FCE205 0%, #f4d900 100%);
+            color:#00104B; border:none; border-radius:12px;
+            font-size:1.1rem; font-weight:700; cursor:pointer; transition: all .3s ease;
+            text-transform:uppercase; letter-spacing:1px; margin-top:20px; position:relative; overflow:hidden;
+            border:2px solid #00104B;
+        }
+        .submit-btn::before{
+            content:''; position:absolute; inset:0; left:-100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+            transition:left .5s;
+        }
+        .submit-btn:hover::before{ left:100%; }
+        .submit-btn:hover{
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(252,226,5,.4);
+            background: linear-gradient(135deg, #f4d900 0%, #FCE205 100%);
+        }
+        .submit-btn:active{ transform: translateY(-1px); }
+
+        .error-message{ color:#d32f2f; font-size:.85rem; margin-top:5px; display:none; }
+        .success-message{
+            background:#e8f5e8; color:#00104B; padding:15px; border-radius:8px;
+            margin-bottom:20px; display:none; border:2px solid #FCE205; font-weight:600;
+        }
+
+        .form-footer{
+            text-align:center; padding:20px; background:#f8f9fa; color:#6c757d; font-size:.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px){
+            .container{ margin:10px; border-radius:15px; }
+            .header{ padding:30px 20px; }
+            .form-container{ padding:30px 20px; }
+            .phone-group, .location-group{ grid-template-columns:1fr; gap:15px; }
+            .logo-img{ width:120px; }
+        }
+
+        /* Loading state */
+        .loading{ pointer-events:none; opacity:.7; }
+        .loading .submit-btn::after{
+            content:''; position:absolute; top:50%; left:50%;
+            width:20px; height:20px; margin:-10px 0 0 -10px;
+            border:2px solid transparent; border-top:2px solid #ffffff; border-radius:50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin{ 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img
+                    class="logo-img"
+                    src="https://ftapcng.stripocdn.email/content/guids/CABINET_497c8c6cf8c55a2fe53e10b55ad3817d8f7e2363f1df84559f9de844cf326f44/images/learn_overseas_white_logo.png"
+                    alt="Learn Overseas Logo"
+                    loading="eager"
+                />
+            </div>
+            <div class="subtitle">Workshop Registration Form</div>
+        </div>
+
+        <form class="form-container" id="registrationForm">
+            <div class="success-message" id="successMessage">
+                ✅ Registration submitted successfully! We'll contact you soon with workshop details.
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name"/>
+                <div class="error-message" id="nameError">Please enter your full name</div>
+            </div>
+
+            <div class="form-group">
+                <div class="phone-group">
+                    <div>
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" pattern="[0-9]{10,15}"/>
+                        <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                    </div>
+                    <div>
+                        <label for="altPhone">Alternate Phone Number</label>
+                        <input type="tel" id="altPhone" name="altPhone" placeholder="Enter alternate number" pattern="[0-9]{10,15}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="location-group">
+                    <div>
+                        <label for="state">Current State <span class="required">*</span></label>
+                        <select id="state" name="state" required>
+                            <option value="">Select your state</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message" id="stateError">Please select your state</div>
+                    </div>
+                    <div>
+                        <label for="city">Current City <span class="required">*</span></label>
+                        <select id="city" name="city" required>
+                            <option value="">Select your city</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Mysore">Mysore</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Trichy">Trichy</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message" id="cityError">Please select your city</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="college">Name of College / University</label>
+                <select id="college" name="college">
+                    <option value="">Select your college/university</option>
+                    <option value="ABC123">ABC123</option>
+                    <option value="XYZ456">XYZ456</option>
+                </select>
+                <div class="error-message" id="collegeError">Please select your college</div>
+            </div>
+
+            <div class="form-group">
+                <label for="workshopDate">Workshop Date & Time <span class="required">*</span></label>
+                <select id="workshopDate" name="workshopDate" required>
+                    <option value="">Select workshop date & time</option>
+                    <option value="2025-TEST-01">2025-TEST-01</option>
+                    <option value="2025-TEST-02">2025-TEST-02</option>
+                </select>
+                <div class="error-message" id="workshopError">Please select a workshop date</div>
+            </div>
+
+            <button type="submit" class="submit-btn">Register Now</button>
+        </form>
+
+        <div class="form-footer">
+            Secure registration powered by Learn Overseas<br/>
+            Your information is safe and will be used only for workshop coordination
+        </div>
+    </div>
+</body>
+</html>
