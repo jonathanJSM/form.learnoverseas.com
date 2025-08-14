@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop Registration - Learn Overseas</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,161 +21,235 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: #fff;
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            animation: slideUp .6s ease-out;
+            animation: slideUp 0.6s ease-out;
         }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
             background: linear-gradient(135deg, #00104B 0%, #1a237e 100%);
-            color: #fff;
+            color: white;
             text-align: center;
             padding: 30px 30px 40px 30px;
             position: relative;
             overflow: hidden;
         }
-        .header::before{
-            content:'';
-            position:absolute; inset:-50%;
-            background: radial-gradient(circle, rgba(252,226,5,.1) 0%, transparent 70%);
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(252, 226, 5, 0.1) 0%, transparent 70%);
             animation: float 6s ease-in-out infinite;
         }
-        @keyframes float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(180deg)} }
 
-        /* Logo Styling */
-        .logo {
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            margin-bottom:14px;
-            position:relative;
-            z-index:1;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
-        .logo-img {
-            width:160px;
-            max-width:80%;
-            height:auto;
-            object-fit:contain;
-            display:block;
-            filter: drop-shadow(0 6px 16px rgba(0,16,75,.25));
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 16, 75, 0.3);
+            border: 3px solid #FCE205;
+            width: 220px;
+            height: auto;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0;
         }
 
         .subtitle {
             font-size: 1.1rem;
-            opacity: .9;
-            position:relative;
-            z-index:1;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        .form-container { padding: 40px 30px; }
+        .form-container {
+            padding: 40px 30px;
+        }
 
         .form-group {
             margin-bottom: 25px;
             opacity: 0;
-            animation: fadeInUp .6s ease-out forwards;
+            animation: fadeInUp 0.6s ease-out forwards;
         }
-        .form-group:nth-child(1){animation-delay:.1s}
-        .form-group:nth-child(2){animation-delay:.2s}
-        .form-group:nth-child(3){animation-delay:.3s}
-        .form-group:nth-child(4){animation-delay:.4s}
-        .form-group:nth-child(5){animation-delay:.5s}
-        .form-group:nth-child(6){animation-delay:.6s}
-        .form-group:nth-child(7){animation-delay:.7s}
-        .form-group:nth-child(8){animation-delay:.8s}
 
-        @keyframes fadeInUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+        .form-group:nth-child(6) { animation-delay: 0.6s; }
+        .form-group:nth-child(7) { animation-delay: 0.7s; }
+        .form-group:nth-child(8) { animation-delay: 0.8s; }
 
-        label { display:block; margin-bottom:8px; font-weight:600; color:#00104B; font-size:.95rem; }
-        .required { color:#d32f2f; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #00104B;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: #d32f2f;
+        }
 
         input, select {
-            width:100%;
-            padding:15px 20px;
-            border:2px solid #e9ecef;
-            border-radius:12px;
-            font-size:1rem;
-            transition: all .3s ease;
-            background:#f8f9fa;
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
         }
-        input:focus, select:focus{
-            outline:none; border-color:#00104B; background:#fff;
-            box-shadow:0 0 0 3px rgba(0,16,75,.1);
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00104B;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 16, 75, 0.1);
             transform: translateY(-2px);
         }
-        input:valid { border-color:#FCE205; }
+
+        input:valid {
+            border-color: #FCE205;
+        }
 
         .phone-group, .location-group {
-            display:grid; grid-template-columns:1fr 1fr; gap:20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
-        .submit-btn{
-            width:100%; padding:18px;
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
             background: linear-gradient(135deg, #FCE205 0%, #f4d900 100%);
-            color:#00104B; border:none; border-radius:12px;
-            font-size:1.1rem; font-weight:700; cursor:pointer; transition: all .3s ease;
-            text-transform:uppercase; letter-spacing:1px; margin-top:20px; position:relative; overflow:hidden;
-            border:2px solid #00104B;
+            color: #00104B;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #00104B;
         }
-        .submit-btn::before{
-            content:''; position:absolute; inset:0; left:-100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
-            transition:left .5s;
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
         }
-        .submit-btn:hover::before{ left:100%; }
-        .submit-btn:hover{
+
+        .submit-btn:hover::before { left: 100%; }
+        .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(252,226,5,.4);
+            box-shadow: 0 10px 25px rgba(252, 226, 5, 0.4);
             background: linear-gradient(135deg, #f4d900 0%, #FCE205 100%);
         }
-        .submit-btn:active{ transform: translateY(-1px); }
+        .submit-btn:active { transform: translateY(-1px); }
 
-        .error-message{ color:#d32f2f; font-size:.85rem; margin-top:5px; display:none; }
-        .success-message{
-            background:#e8f5e8; color:#00104B; padding:15px; border-radius:8px;
-            margin-bottom:20px; display:none; border:2px solid #FCE205; font-weight:600;
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
         }
 
-        .form-footer{
-            text-align:center; padding:20px; background:#f8f9fa; color:#6c757d; font-size:.9rem;
+        .success-message {
+            background: #e8f5e8;
+            color: #00104B;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            border: 2px solid #FCE205;
+            font-weight: 600;
         }
 
-        /* Responsive */
-        @media (max-width: 768px){
-            .container{ margin:10px; border-radius:15px; }
-            .header{ padding:30px 20px; }
-            .form-container{ padding:30px 20px; }
-            .phone-group, .location-group{ grid-template-columns:1fr; gap:15px; }
-            .logo-img{ width:120px; }
+        .form-footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9rem;
         }
 
-        /* Loading state */
-        .loading{ pointer-events:none; opacity:.7; }
-        .loading .submit-btn::after{
-            content:''; position:absolute; top:50%; left:50%;
-            width:20px; height:20px; margin:-10px 0 0 -10px;
-            border:2px solid transparent; border-top:2px solid #ffffff; border-radius:50%;
+        @media (max-width: 768px) {
+            .container { margin: 10px; border-radius: 15px; }
+            .header { padding: 30px 20px; }
+            .logo { font-size: 2rem; }
+            .form-container { padding: 30px 20px; }
+            .phone-group, .location-group { grid-template-columns: 1fr; gap: 15px; }
+        }
+
+        .loading { pointer-events: none; opacity: 0.7; }
+        .loading .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 20px; height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        @keyframes spin{ 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img
-                    class="logo-img"
-                    src="https://ftapcng.stripocdn.email/content/guids/CABINET_497c8c6cf8c55a2fe53e10b55ad3817d8f7e2363f1df84559f9de844cf326f44/images/learn_overseas_white_logo.png"
-                    alt="Learn Overseas Logo"
-                    loading="eager"
-                />
+                <div class="logo-icon">
+                    <img src="https://ftapcng.stripocdn.email/content/guids/CABINET_497c8c6cf8c55a2fe53e10b55ad3817d8f7e2363f1df84559f9de844cf326f44/images/learn_overseas_white_logo.png" alt="Learn Overseas Logo">
+                </div>
             </div>
             <div class="subtitle">Workshop Registration Form</div>
         </div>
@@ -183,7 +261,7 @@
 
             <div class="form-group">
                 <label for="name">Full Name <span class="required">*</span></label>
-                <input type="text" id="name" name="name" required placeholder="Enter your full name"/>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
                 <div class="error-message" id="nameError">Please enter your full name</div>
             </div>
 
@@ -191,12 +269,12 @@
                 <div class="phone-group">
                     <div>
                         <label for="phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" pattern="[0-9]{10,15}"/>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" pattern="[0-9]{10,15}">
                         <div class="error-message" id="phoneError">Please enter a valid phone number</div>
                     </div>
                     <div>
                         <label for="altPhone">Alternate Phone Number</label>
-                        <input type="tel" id="altPhone" name="altPhone" placeholder="Enter alternate number" pattern="[0-9]{10,15}"/>
+                        <input type="tel" id="altPhone" name="altPhone" placeholder="Enter alternate number" pattern="[0-9]{10,15}">
                     </div>
                 </div>
             </div>
@@ -241,8 +319,6 @@
                 <label for="college">Name of College / University</label>
                 <select id="college" name="college">
                     <option value="">Select your college/university</option>
-                    <option value="ABC123">ABC123</option>
-                    <option value="XYZ456">XYZ456</option>
                 </select>
                 <div class="error-message" id="collegeError">Please select your college</div>
             </div>
@@ -251,8 +327,12 @@
                 <label for="workshopDate">Workshop Date & Time <span class="required">*</span></label>
                 <select id="workshopDate" name="workshopDate" required>
                     <option value="">Select workshop date & time</option>
-                    <option value="2025-TEST-01">2025-TEST-01</option>
-                    <option value="2025-TEST-02">2025-TEST-02</option>
+                    <option value="2025-08-15_10:00">August 15, 2025 - 10:00 AM to 12:00 PM</option>
+                    <option value="2025-08-15_14:00">August 15, 2025 - 2:00 PM to 4:00 PM</option>
+                    <option value="2025-08-16_10:00">August 16, 2025 - 10:00 AM to 12:00 PM</option>
+                    <option value="2025-08-16_14:00">August 16, 2025 - 2:00 PM to 4:00 PM</option>
+                    <option value="2025-08-17_10:00">August 17, 2025 - 10:00 AM to 12:00 PM</option>
+                    <option value="2025-08-17_14:00">August 17, 2025 - 2:00 PM to 4:00 PM</option>
                 </select>
                 <div class="error-message" id="workshopError">Please select a workshop date</div>
             </div>
@@ -261,9 +341,134 @@
         </form>
 
         <div class="form-footer">
-            Secure registration powered by Learn Overseas<br/>
+            Secure registration powered by Learn Overseas<br>
             Your information is safe and will be used only for workshop coordination
         </div>
     </div>
+
+    <script>
+        const collegeData = {
+            "Bangalore": ["Presidency University","BMSIT","Reva University","MVIT","Shristi Manipal University","Alliance University","AMC Institutions","ISBR","Christ University","Jyothi Nivas College","Cmr Institute of Technology","PES University","RV College of engineering","Bengaluru university","Dayanand sagar","Indian Institute of science","ST. Josephs Lalbagh","Bms college of engineering","Ramaiah university of applied sciences","Bangalore Institute of Technology","New horizon College of engineering","St. Josephs College of Commerce","Atria Institute of Technology","Mount Carmel College , Autonomous","Bms Law college","Srinivasa Institute of technology and science","Jain CMS Lal Bagh - BBA","Jain CMS Lal Bagh - BAJ/MAJ","Jain school of science","Jain School of design","Jain College Vasavi","Jain - School of Commerce","Jain - School of CSIT","Jain - Faculty of Engineering","Jain school of science & humanities","Other"],
+            "Mysore": ["University of Mysore (UoM)","Sri Jayachamarajendra College of Engineering (SJCE)","National Institute of Engineering (NIE)","JSS Science and Technology University (JSS STU)","Vidya Vardhaka College of Engineering (VVCE)","GSSSIETW (For Women)","Amrita School of Arts & Sciences","St. Philomena's College","Yuvaraja's College (UoM)","Maharaja's College (UoM)","SBRR Mahajana First Grade College","Sarada Vilas College","MIT Mysore (Mysore Institute of Technology)","Vidya Vikas Institute of Engineering & Tech (VVIET)","JSS College of Arts, Commerce and Science","Basudev Somani College","TTL College of Business Management","Gopalaswamy College of Professional Studies","Sapient College of Commerce & Management","Other"]
+        };
+
+        function updateColleges() {
+            const citySelect = document.getElementById('city');
+            const collegeSelect = document.getElementById('college');
+            const selectedCity = citySelect.value;
+            collegeSelect.innerHTML = '<option value="">Select your college/university</option>';
+            if (collegeData[selectedCity]) {
+                collegeData[selectedCity].forEach(college => {
+                    const option = document.createElement('option');
+                    option.value = college;
+                    option.textContent = college;
+                    collegeSelect.appendChild(option);
+                });
+            } else {
+                const option = document.createElement('option');
+                option.value = 'Other';
+                option.textContent = 'Other';
+                collegeSelect.appendChild(option);
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+            const name = document.getElementById('name');
+            const nameError = document.getElementById('nameError');
+            if (!name.value.trim()) { nameError.style.display = 'block'; name.style.borderColor = '#e74c3c'; isValid = false; }
+            else { nameError.style.display = 'none'; name.style.borderColor = '#27ae60'; }
+
+            const phone = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            const phonePattern = /^[0-9]{10,15}$/;
+            if (!phone.value || !phonePattern.test(phone.value)) { phoneError.style.display = 'block'; phone.style.borderColor = '#e74c3c'; isValid = false; }
+            else { phoneError.style.display = 'none'; phone.style.borderColor = '#27ae60'; }
+
+            const state = document.getElementById('state');
+            const stateError = document.getElementById('stateError');
+            if (!state.value) { stateError.style.display = 'block'; state.style.borderColor = '#e74c3c'; isValid = false; }
+            else { stateError.style.display = 'none'; state.style.borderColor = '#27ae60'; }
+
+            const city = document.getElementById('city');
+            const cityError = document.getElementById('cityError');
+            if (!city.value) { cityError.style.display = 'block'; city.style.borderColor = '#e74c3c'; isValid = false; }
+            else { cityError.style.display = 'none'; city.style.borderColor = '#27ae60'; }
+
+            const workshop = document.getElementById('workshopDate');
+            const workshopError = document.getElementById('workshopError');
+            if (!workshop.value) { workshopError.style.display = 'block'; workshop.style.borderColor = '#e74c3c'; isValid = false; }
+            else { workshopError.style.display = 'none'; workshop.style.borderColor = '#27ae60'; }
+
+            return isValid;
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            if (!validateForm()) return;
+
+            const form = document.getElementById('registrationForm');
+            const submitBtn = document.querySelector('.submit-btn');
+            const successMessage = document.getElementById('successMessage');
+
+            form.classList.add('loading');
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                altPhone: document.getElementById('altPhone').value,
+                state: document.getElementById('state').value,
+                city: document.getElementById('city').value,
+                college: document.getElementById('college').value,
+                workshopDate: document.getElementById('workshopDate').value,
+                timestamp: new Date().toISOString(),
+                leadSource: 'Workshop',
+                eventAttended: 'Yes'
+            };
+
+            try {
+                const resp = await fetch('https://v1hooks.superleap.com/ERPWRx/ERPWRx_OqxE24VRQDzx55fSYWfE/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!resp.ok) throw new Error('Network response was not ok');
+
+                form.classList.remove('loading');
+                submitBtn.textContent = 'Register Now';
+                successMessage.style.display = 'block';
+                document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+
+                setTimeout(() => {
+                    form.reset();
+                    successMessage.style.display = 'none';
+                    document.querySelectorAll('input, select').forEach(f => f.style.borderColor = '#e9ecef');
+                    document.getElementById('college').innerHTML = '<option value="">Select your college/university</option>';
+                }, 3000);
+            } catch (err) {
+                console.error('Error:', err);
+                form.classList.remove('loading');
+                submitBtn.textContent = 'Register Now';
+                alert('There was an error submitting your registration. Please try again or contact support.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('city').addEventListener('change', updateColleges);
+            document.getElementById('registrationForm').addEventListener('submit', handleSubmit);
+            document.querySelectorAll('input, select').forEach(field => {
+                field.addEventListener('blur', validateForm);
+                field.addEventListener('input', function () {
+                    if (this.value) {
+                        this.style.borderColor = '#27ae60';
+                        const errEl = document.getElementById(this.id + 'Error');
+                        if (errEl) errEl.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
